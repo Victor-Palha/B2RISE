@@ -4,5 +4,3 @@ export async function AdjustSalariesBelowthresholdService(){
     const service = makeAdjustSalariesBelowthreshold();
     return await service.execute();
 }
-
-await AdjustSalariesBelowthresholdService();

@@ -11,7 +11,8 @@
     "revenue": "tsx src/infra/services/calculate-total-revenue-service.ts",
     "duplicate": "tsx src/infra/services/identify-duplicate-email-service.ts",
     "adjust": "tsx src/infra/services/adjust-salaries-below-threshold-service.ts",
-    "customers": "tsx src/infra/services/find-customers-with-total-orders-service.ts"
+    "customers": "tsx src/infra/services/find-customers-with-total-orders-service.ts",
+    "categories": "tsx src/infra/services/find-categories-with-total-sales-above-threshold-service.ts"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +21,7 @@
   "devDependencies": {
     "@types/node": "^22.12.0",
     "tsx": "^4.19.2",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.4"
   }
 }

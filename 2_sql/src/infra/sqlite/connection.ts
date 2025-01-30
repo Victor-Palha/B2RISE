@@ -4,11 +4,16 @@ import { fileURLToPath } from 'node:url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+let DATABASE_FILE = "database.sqlite";
+
+if(process.env.NODE_ENV === 'test') {
+    DATABASE_FILE = "test.sqlite";
+}
 
 export class SQLite extends DatabaseSync {
     constructor() {
         super(
-            path.join(__dirname, "../../../data/database.sqlite"),
+            path.join(__dirname, "../../../data/", DATABASE_FILE),
             {
                 open: true,
                 readOnly: false,

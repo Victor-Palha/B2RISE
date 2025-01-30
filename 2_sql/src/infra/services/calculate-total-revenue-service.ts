@@ -2,5 +2,5 @@ import { makeCalculateTotalRevenue } from "../factory/make-calculate-total-reven
 
 export async function calculateTotalRevenueService(){
     const service = makeCalculateTotalRevenue();
-    return await service.execute()
+    return await service.execute();
 }

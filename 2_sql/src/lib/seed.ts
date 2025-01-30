@@ -13,15 +13,27 @@ import { SQLiteEmployeesRepository } from "../infra/repositories/sqlite-employee
 import { SQLiteOrderRepository } from "../infra/repositories/sqlite-order-repository";
 import { SQLiteSalesRepository } from "../infra/repositories/sqlite-sales-repository";
 import { SQLiteUserRepository } from "../infra/repositories/sqlite-user-repository";
+import { SQLiteCategoriesRepository } from "../infra/repositories/sqlite-categories-repository";
 import { DATABASE } from "../infra/sqlite/connection";
+import { CategoryRepository } from "../domain/categories/repositories/category-repository";
+import { ProductRepository } from "../domain/categories/repositories/product-repository";
+import { TransactionRepository } from "../domain/categories/repositories/transaction-repository";
+import { SQLiteProductsRepository } from "../infra/repositories/sqlite-products-repository";
+import { SQLiteTransactionsRepository } from "../infra/repositories/sqlite-transactions-repository";
+import { CategoryEntity } from "../domain/categories/entities/category-entity";
+import { ProductEntity } from "../domain/categories/entities/product-entity";
+import { TransactionEntity } from "../domain/categories/entities/transaction-entity";
 
-function seed() {
+export function seed() {
     const database = DATABASE;
     const salesRepository = new SQLiteSalesRepository(database);
     const userRepository = new SQLiteUserRepository(database);
     const employeeRepository = new SQLiteEmployeesRepository(database);
     const customerRepository = new SQLiteCustomerRepository(database);
     const orderRepository = new SQLiteOrderRepository(database);
+    const categoryRepository = new SQLiteCategoriesRepository(database);
+    const productRepository = new SQLiteProductsRepository(database);
+    const transactionRepository = new SQLiteTransactionsRepository(database);
     console.log("Seeding sales...");
     seedSales(salesRepository);
     console.log("Seeding users...");
@@ -32,6 +44,12 @@ function seed() {
     seedCustomers(customerRepository);
     console.log("Seeding orders...");
     seedOrder(orderRepository);
+    console.log("Seeding categories...");
+    seedCategories(categoryRepository);
+    console.log("Seeding products...");
+    seedProducts(productRepository);
+    console.log("Seeding transactions...");
+    seedTransactions(transactionRepository);
 }
 
 function seedSales(salesRepository: SalesRepository) {
@@ -120,4 +138,46 @@ function seedOrder(orderRepository: OrderRepository) {
         orderRepository.create(order)
     })
 }
+
+function seedCategories(categoryRepository: CategoryRepository) {
+    const categories = [
+        new CategoryEntity("LIMPEZA"), // id: 1
+        new CategoryEntity("ALIMENTAÇÃO"), // id: 2
+        new CategoryEntity("ELETRÔNICOS"), // id: 3
+        new CategoryEntity("LIVROS") // id: 4
+    ];
+
+    categories.forEach(category => categoryRepository.create(category));
+}
+
+function seedProducts(productRepository: ProductRepository){
+    const products = [
+        new ProductEntity("Detergente", 1), // id: 1
+        new ProductEntity("Arroz", 2), // id: 2
+        new ProductEntity("Feijão", 2), // id: 3
+        new ProductEntity("Celular", 3), // id: 4
+        new ProductEntity("Notebook", 3), // id: 5
+        new ProductEntity("Tablet", 3), // id: 6
+        new ProductEntity("Bíblia", 4), // id: 7
+        new ProductEntity("Harry Potter", 4), // id: 8
+    ]
+
+    products.forEach(product => productRepository.create(product));
+}
+
+function seedTransactions(transactionRepository: TransactionRepository) {
+    const transactions = [
+        new TransactionEntity(1, 230),
+        new TransactionEntity(2, 150),
+        new TransactionEntity(3, 99),
+        new TransactionEntity(4, 82),
+        new TransactionEntity(5, 399),
+        new TransactionEntity(6, 122),
+        new TransactionEntity(7, 49),
+        new TransactionEntity(8, 19),
+    ]
+
+    transactions.forEach(transaction => transactionRepository.create(transaction));
+}
+
 seed();

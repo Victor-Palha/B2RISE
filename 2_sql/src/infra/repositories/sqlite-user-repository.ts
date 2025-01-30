@@ -1,11 +1,14 @@
 import { UserEntity } from "../../domain/users/entity/user-entity";
 import { IdentifyDuplicateEmailsResponse, UserRepository } from "../../domain/users/repositories/user-repository";
 import { SQLite } from "../sqlite/connection";
+import { SQLiteBaseRepository } from "./sqlite-base-repository";
 
-export class SQLiteUserRepository implements UserRepository {
+export class SQLiteUserRepository extends SQLiteBaseRepository implements UserRepository {
     constructor(
         private readonly database: SQLite
-    ){}
+    ){
+        super();
+    }
 
     public async create(data: UserEntity){
         const user = data.toDTO;
@@ -20,11 +23,7 @@ export class SQLiteUserRepository implements UserRepository {
             `SELECT email, COUNT(*) as count FROM users GROUP BY email HAVING count > 1`
         )
         const result = query.all();
-        const fixedResult: IdentifyDuplicateEmailsResponse[] = [];
-        for (const user of result) {
-            fixedResult.push(Object.create(Object.prototype, Object.getOwnPropertyDescriptors(user)));
-        }
-        return fixedResult;
+        return this.mapperFromDBToPresenter<IdentifyDuplicateEmailsResponse>(result);
     }
 
 }

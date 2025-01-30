@@ -1,11 +1,14 @@
 import { EmployerEntity } from "../../domain/employees/entity/employees-entity";
 import { EmployeesRepository } from "../../domain/employees/repositories/employees-repository";
 import { SQLite } from "../sqlite/connection";
+import { SQLiteBaseRepository } from "./sqlite-base-repository";
 
-export class SQLiteEmployeesRepository implements EmployeesRepository {
+export class SQLiteEmployeesRepository extends SQLiteBaseRepository implements EmployeesRepository {
     constructor(
         private readonly database: SQLite
-    ){}
+    ){
+        super();
+    }
 
     public async create(employerEntity: EmployerEntity){
         const employer = employerEntity.toDto;

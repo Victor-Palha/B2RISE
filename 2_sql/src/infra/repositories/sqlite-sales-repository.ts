@@ -1,11 +1,14 @@
 import { SalesEntity } from "../../domain/sales/entities/sales-entity";
 import { CalculateTotalRevenueByProductResponse, SalesRepository } from "../../domain/sales/repositories/sales-repository";
 import { SQLite } from "../sqlite/connection";
+import { SQLiteBaseRepository } from "./sqlite-base-repository";
 
-export class SQLiteSalesRepository implements SalesRepository {
+export class SQLiteSalesRepository extends SQLiteBaseRepository implements SalesRepository {
     constructor(
         private readonly database: SQLite
-    ){}
+    ){
+        super();
+    }
 
     public async create(salesEntity: SalesEntity){
         const salesData = salesEntity.toDTO;
@@ -20,11 +23,6 @@ export class SQLiteSalesRepository implements SalesRepository {
             `SELECT product, SUM(quantity * price) as total FROM sales GROUP BY product`
         )
         const result = query.all();
-        const fixedResult: CalculateTotalRevenueByProductResponse[] = [];
-    
-        for (const sale of result) {
-            fixedResult.push(Object.create(Object.prototype, Object.getOwnPropertyDescriptors(sale)));
-        }
-        return fixedResult;
+        return this.mapperFromDBToPresenter<CalculateTotalRevenueByProductResponse>(result);
     }
 }

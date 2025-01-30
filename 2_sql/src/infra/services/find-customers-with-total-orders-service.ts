@@ -4,5 +4,3 @@ export async function findCustomersWithTotalOrdersService() {
     const service = makeFindCustomersWithTotalOrders();
     return await service.execute();
 }
-
-console.log(await findCustomersWithTotalOrdersService());

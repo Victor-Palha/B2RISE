@@ -1,13 +1,16 @@
 import { CustomerEntity } from "../../domain/orders/entities/customer-entity";
 import { CustomerRepository, FindCustomersWithTotalOrdersResponse } from "../../domain/orders/repositories/customer-repository";
 import { SQLite } from "../sqlite/connection";
+import { SQLiteBaseRepository } from "./sqlite-base-repository";
 
-export class SQLiteCustomerRepository implements CustomerRepository {
+export class SQLiteCustomerRepository extends SQLiteBaseRepository implements CustomerRepository {
     constructor(
         private readonly database: SQLite
-    ) {}
+    ) {
+        super();
+    }
 
-    async create(customerEntity: CustomerEntity): Promise<void> {
+    public async create(customerEntity: CustomerEntity): Promise<void> {
         const customer = customerEntity.toDto;
         const insert = this.database.prepare(
             `INSERT INTO customers (name, country) VALUES (?, ?)`
@@ -15,7 +18,7 @@ export class SQLiteCustomerRepository implements CustomerRepository {
         insert.run(customer.name, customer.country);
     }
 
-    async findCustomersWithTotalOrders(): Promise<FindCustomersWithTotalOrdersResponse[]> {
+    public async findCustomersWithTotalOrders(): Promise<FindCustomersWithTotalOrdersResponse[]> {
         const query = this.database.prepare(`
             SELECT c.id, c.name, SUM(o.total) AS total 
             FROM customers c 
@@ -24,10 +27,6 @@ export class SQLiteCustomerRepository implements CustomerRepository {
             ORDER BY total DESC
         `);
         const result = query.all();
-        const fixedResult: FindCustomersWithTotalOrdersResponse[] = [];
-        for (const total of result) {
-            fixedResult.push(Object.create(Object.prototype, Object.getOwnPropertyDescriptors(total)));
-        }
-        return fixedResult
+        return this.mapperFromDBToPresenter<FindCustomersWithTotalOrdersResponse>(result);
     }
 }
