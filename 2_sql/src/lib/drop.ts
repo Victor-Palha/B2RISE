@@ -1,7 +1,7 @@
-import { DATABASE } from "../infra/sqlite/connection";
+import { DATABASE, SQLite } from "../infra/sqlite/connection";
 
-export function drop(){
-    const database = DATABASE;
+export function drop(db: SQLite = DATABASE) {
+    const database = db;
     console.log('Dropping all tables...');
     console.log('-=-=-=-=-=-=-=-=-=-=-=-=-=');
     database.exec(`DROP TABLE IF EXISTS sales`);

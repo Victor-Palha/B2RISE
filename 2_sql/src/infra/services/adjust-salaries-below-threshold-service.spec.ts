@@ -1,10 +1,7 @@
-import { beforeEach } from "node:test";
-import { describe, expect, it } from "vitest";
-import { drop } from "../../lib/drop";
-import { migrate } from "../../lib/migrate";
-import { seed } from "../../lib/seed";
-import { DATABASE, SQLite } from "../sqlite/connection";
+import { beforeAll, describe, expect, it } from "vitest";
+import { SQLite } from "../sqlite/connection";
 import { AdjustSalariesBelowthresholdService } from "./adjust-salaries-below-threshold-service";
+
 
 type Employer = {
     id: number;
@@ -13,13 +10,11 @@ type Employer = {
 }
 
 describe("Adjust Salaries Below Threshold Service", () => {
-    let SQL_DATABASE: SQLite;
-    beforeEach(() => {
-        // Reset database and seed
-        drop();
-        migrate();
-        seed();
-        SQL_DATABASE = DATABASE;
+
+    let DATABASE: SQLite;
+    
+    beforeAll(() => {
+        DATABASE = new SQLite();
     })
 
     it("should be adjusted to 10% of the current salary if it is below 5000", async () => {

@@ -14,7 +14,7 @@ import { SQLiteOrderRepository } from "../infra/repositories/sqlite-order-reposi
 import { SQLiteSalesRepository } from "../infra/repositories/sqlite-sales-repository";
 import { SQLiteUserRepository } from "../infra/repositories/sqlite-user-repository";
 import { SQLiteCategoriesRepository } from "../infra/repositories/sqlite-categories-repository";
-import { DATABASE } from "../infra/sqlite/connection";
+import { DATABASE, SQLite } from "../infra/sqlite/connection";
 import { CategoryRepository } from "../domain/categories/repositories/category-repository";
 import { ProductRepository } from "../domain/categories/repositories/product-repository";
 import { TransactionRepository } from "../domain/categories/repositories/transaction-repository";
@@ -24,8 +24,8 @@ import { CategoryEntity } from "../domain/categories/entities/category-entity";
 import { ProductEntity } from "../domain/categories/entities/product-entity";
 import { TransactionEntity } from "../domain/categories/entities/transaction-entity";
 
-export function seed() {
-    const database = DATABASE;
+export function seed(db: SQLite = DATABASE) {
+    const database = db;
     const salesRepository = new SQLiteSalesRepository(database);
     const userRepository = new SQLiteUserRepository(database);
     const employeeRepository = new SQLiteEmployeesRepository(database);

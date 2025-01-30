@@ -1,7 +1,7 @@
 import { DATABASE, SQLite } from "../infra/sqlite/connection";
 
-export function migrate() {
-    const database = DATABASE;
+export function migrate(db: SQLite = DATABASE) {
+    const database = db;
     console.log('Migrating database...');
     console.log('-=-=-=-=-=-=-=-=-=-=-=-=-=');
     console.log('Creating sales table...');
