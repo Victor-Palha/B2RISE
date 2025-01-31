@@ -5,9 +5,11 @@ import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const databaseName = process.env.NODE_ENV === "test" && process.env.DB_NAME
-    ? process.env.DB_NAME
+const databaseName = process.env.NODE_ENV === "test"
+    ? "test.sqlite"
     : "database.sqlite";
+
+console.log(`Using database: ${databaseName}`);
 
 export class SQLite extends DatabaseSync {
     constructor(db: string = databaseName) {

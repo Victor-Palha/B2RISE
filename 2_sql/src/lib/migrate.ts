@@ -19,7 +19,7 @@ export function migrate(db: SQLite = DATABASE) {
     console.log('Creating products table...');
     up_product(database);
     console.log('Creating transactions table...');
-    up_transaction(database);
+    up_payments(database);
 }
 
 function up_sales(db: SQLite) {
@@ -87,9 +87,9 @@ function up_product(db: SQLite) {
     `);
 }
 
-function up_transaction(db: SQLite) {
+function up_payments(db: SQLite) {
     db.exec(`
-        CREATE TABLE IF NOT EXISTS transactions (
+        CREATE TABLE IF NOT EXISTS payments (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             quantity INTEGER,
             product_id INTEGER,

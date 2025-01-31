@@ -1,4 +1,4 @@
-export class TransactionEntity {
+export class PaymentEntity {
     constructor(
         private productId: number,
         private quantity: number,

@@ -17,12 +17,12 @@ import { SQLiteCategoriesRepository } from "../infra/repositories/sqlite-categor
 import { DATABASE, SQLite } from "../infra/sqlite/connection";
 import { CategoryRepository } from "../domain/categories/repositories/category-repository";
 import { ProductRepository } from "../domain/categories/repositories/product-repository";
-import { TransactionRepository } from "../domain/categories/repositories/transaction-repository";
+import { PaymentRepository } from "../domain/categories/repositories/payment-repository";
 import { SQLiteProductsRepository } from "../infra/repositories/sqlite-products-repository";
-import { SQLiteTransactionsRepository } from "../infra/repositories/sqlite-transactions-repository";
 import { CategoryEntity } from "../domain/categories/entities/category-entity";
 import { ProductEntity } from "../domain/categories/entities/product-entity";
-import { TransactionEntity } from "../domain/categories/entities/transaction-entity";
+import { SQLitePaymentsRepository } from "../infra/repositories/sqlite-payments-repository";
+import { PaymentEntity } from "../domain/categories/entities/payment-entity";
 
 export function seed(db: SQLite = DATABASE) {
     const database = db;
@@ -33,7 +33,7 @@ export function seed(db: SQLite = DATABASE) {
     const orderRepository = new SQLiteOrderRepository(database);
     const categoryRepository = new SQLiteCategoriesRepository(database);
     const productRepository = new SQLiteProductsRepository(database);
-    const transactionRepository = new SQLiteTransactionsRepository(database);
+    const paymentRepository = new SQLitePaymentsRepository(database);
     console.log("Seeding sales...");
     seedSales(salesRepository);
     console.log("Seeding users...");
@@ -48,8 +48,8 @@ export function seed(db: SQLite = DATABASE) {
     seedCategories(categoryRepository);
     console.log("Seeding products...");
     seedProducts(productRepository);
-    console.log("Seeding transactions...");
-    seedTransactions(transactionRepository);
+    console.log("Seeding payments...");
+    seedPayments(paymentRepository);
 }
 
 function seedSales(salesRepository: SalesRepository) {
@@ -165,19 +165,19 @@ function seedProducts(productRepository: ProductRepository){
     products.forEach(product => productRepository.create(product));
 }
 
-function seedTransactions(transactionRepository: TransactionRepository) {
-    const transactions = [
-        new TransactionEntity(1, 230),
-        new TransactionEntity(2, 150),
-        new TransactionEntity(3, 99),
-        new TransactionEntity(4, 82),
-        new TransactionEntity(5, 399),
-        new TransactionEntity(6, 122),
-        new TransactionEntity(7, 49),
-        new TransactionEntity(8, 19),
+function seedPayments(paymentRepository: PaymentRepository) {
+    const payments = [
+        new PaymentEntity(1, 230),
+        new PaymentEntity(2, 150),
+        new PaymentEntity(3, 99),
+        new PaymentEntity(4, 82),
+        new PaymentEntity(5, 399),
+        new PaymentEntity(6, 122),
+        new PaymentEntity(7, 49),
+        new PaymentEntity(8, 19),
     ]
 
-    transactions.forEach(transaction => transactionRepository.create(transaction));
+    payments.forEach(payment => paymentRepository.create(payment));
 }
 
 seed();

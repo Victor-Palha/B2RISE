@@ -25,7 +25,7 @@ describe("Find categories with total sales aboce threshold", () => {
     `)
 
     DATABASE.exec(`
-      CREATE TABLE IF NOT EXISTS transactions (
+      CREATE TABLE IF NOT EXISTS payments (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           quantity INTEGER,
           product_id INTEGER,
@@ -53,7 +53,7 @@ describe("Find categories with total sales aboce threshold", () => {
     `);
 
     DATABASE.exec(`
-        INSERT INTO transactions (product_id, quantity) VALUES
+        INSERT INTO payments (product_id, quantity) VALUES
         (1, 230),
         (2, 150),
         (3, 99),
@@ -66,7 +66,7 @@ describe("Find categories with total sales aboce threshold", () => {
   })
 
   afterEach(() => {
-    DATABASE.exec(`DROP TABLE IF EXISTS transactions`);
+    DATABASE.exec(`DROP TABLE IF EXISTS payments`);
     DATABASE.exec(`DROP TABLE IF EXISTS products`);
     DATABASE.exec(`DROP TABLE IF EXISTS categories`);
   })
