@@ -3,16 +3,15 @@
   "version": "1.0.0",
   "main": "index.ts",
   "type": "module",
+  "engines": {
+    "node": ">=22.13.1"
+  },
   "scripts": {
     "db:migrate": "tsx src/lib/migrate.ts",
     "db:seed": "tsx src/lib/seed.ts",
     "db:drop": "tsx src/lib/drop.ts",
     "db:reset": "npm run db:drop && npm run db:migrate && npm run db:seed",
-    "revenue": "tsx src/infra/services/calculate-total-revenue-service.ts",
-    "duplicate": "tsx src/infra/services/identify-duplicate-email-service.ts",
-    "adjust": "tsx src/infra/services/adjust-salaries-below-threshold-service.ts",
-    "customers": "tsx src/infra/services/find-customers-with-total-orders-service.ts",
-    "categories": "tsx src/infra/services/find-categories-with-total-sales-above-threshold-service.ts"
+    "test": "vitest"
   },
   "keywords": [],
   "author": "",
