@@ -18,8 +18,11 @@ export function migrate(db: SQLite = DATABASE) {
     up_category(database);
     console.log('Creating products table...');
     up_product(database);
-    console.log('Creating transactions table...');
+    console.log('Creating payments table...');
     up_payments(database);
+    console.log('Creating transactions table...');
+    up_transactions(database);
+    console.log('-=-=-=-=-=-=-=-=-=-=-=-=-=');
 }
 
 function up_sales(db: SQLite) {
@@ -94,6 +97,16 @@ function up_payments(db: SQLite) {
             quantity INTEGER,
             product_id INTEGER,
             FOREIGN KEY(product_id) REFERENCES products(id))
+    `);
+}
+
+function up_transactions(db: SQLite) {
+    db.exec(`
+        CREATE TABLE IF NOT EXISTS transactions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            account_id INTEGER,
+            transaction_date TEXT,
+            amount REAL)
     `);
 }
 

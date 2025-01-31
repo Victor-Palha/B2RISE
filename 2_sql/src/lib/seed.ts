@@ -23,6 +23,9 @@ import { CategoryEntity } from "../domain/categories/entities/category-entity";
 import { ProductEntity } from "../domain/categories/entities/product-entity";
 import { SQLitePaymentsRepository } from "../infra/repositories/sqlite-payments-repository";
 import { PaymentEntity } from "../domain/categories/entities/payment-entity";
+import { TransactionRepository } from "../domain/transactions/repositories/transaction-repository";
+import { TransactionEntity } from "../domain/transactions/entity/transaction-entity";
+import { SQLiteTransactionsRepository } from "../infra/repositories/sqlite-transactions-repository";
 
 export function seed(db: SQLite = DATABASE) {
     const database = db;
@@ -34,6 +37,7 @@ export function seed(db: SQLite = DATABASE) {
     const categoryRepository = new SQLiteCategoriesRepository(database);
     const productRepository = new SQLiteProductsRepository(database);
     const paymentRepository = new SQLitePaymentsRepository(database);
+    const transactionRepository = new SQLiteTransactionsRepository(database);
     console.log("Seeding sales...");
     seedSales(salesRepository);
     console.log("Seeding users...");
@@ -50,6 +54,9 @@ export function seed(db: SQLite = DATABASE) {
     seedProducts(productRepository);
     console.log("Seeding payments...");
     seedPayments(paymentRepository);
+    console.log("Seeding transactions...");
+    seedTransactions(transactionRepository);
+    console.log("Seeding completed!");
 }
 
 function seedSales(salesRepository: SalesRepository) {
@@ -178,6 +185,28 @@ function seedPayments(paymentRepository: PaymentRepository) {
     ]
 
     payments.forEach(payment => paymentRepository.create(payment));
+}
+
+function seedTransactions(transactionRepository: TransactionRepository) {
+    const transactionSeed = [
+        new TransactionEntity(1, new Date("2025-01-05T10:30:00Z"), 5000),
+        new TransactionEntity(1, new Date("2025-01-15T14:45:00Z"), 6000), // Total 11000
+        new TransactionEntity(1, new Date('2025-02-15T11:45:00Z'), 10000),
+        
+        new TransactionEntity(2, new Date("2025-01-10T08:15:00Z"), 3000),
+        new TransactionEntity(2, new Date("2025-01-20T12:00:00Z"), 4000),
+        new TransactionEntity(2, new Date("2025-01-25T16:30:00Z"), 5000), // Total 12000
+        
+        new TransactionEntity(3, new Date("2025-02-05T09:20:00Z"), 2000),
+        new TransactionEntity(3, new Date("2025-02-15T13:00:00Z"), 1500), // Total 3500
+        
+        new TransactionEntity(4, new Date("2025-03-10T11:45:00Z"), 12000), // Total 12000
+        
+        new TransactionEntity(5, new Date("2025-01-05T07:30:00Z"), 8000),
+        new TransactionEntity(5, new Date("2025-01-25T14:10:00Z"), 3000), // Total 11000
+    ];
+
+    transactionSeed.forEach(transaction => transactionRepository.create(transaction));
 }
 
 seed();

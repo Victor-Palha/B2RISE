@@ -9,9 +9,11 @@ export function drop(db: SQLite = DATABASE) {
     database.exec(`DROP TABLE IF EXISTS employees`);
     database.exec(`DROP TABLE IF EXISTS orders`);
     database.exec(`DROP TABLE IF EXISTS customers`);
-    database.exec(`DROP TABLE IF EXISTS transactions`);
+    database.exec(`DROP TABLE IF EXISTS payments`);
     database.exec(`DROP TABLE IF EXISTS products`);
     database.exec(`DROP TABLE IF EXISTS categories`);
+    database.exec(`DROP TABLE IF EXISTS transactions`);
+    console.log('-=-=-=-=-=-=-=-=-=-=-=-=-=');
 }
 
 drop();
