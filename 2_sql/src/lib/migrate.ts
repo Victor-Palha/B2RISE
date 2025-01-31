@@ -84,7 +84,7 @@ function up_product(db: SQLite) {
             name TEXT,
             category_id INTEGER,
             FOREIGN KEY(category_id) REFERENCES categories(id))
-    `)
+    `);
 }
 
 function up_transaction(db: SQLite) {
@@ -94,7 +94,7 @@ function up_transaction(db: SQLite) {
             quantity INTEGER,
             product_id INTEGER,
             FOREIGN KEY(product_id) REFERENCES products(id))
-    `)
+    `);
 }
 
 migrate();

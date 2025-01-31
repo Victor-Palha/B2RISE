@@ -1,4 +1,4 @@
-import { beforeAll, describe, expect, it } from "vitest";
+import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
 import { SQLite } from "../sqlite/connection";
 import { calculateTotalRevenueService } from "./calculate-total-revenue-service";
 
@@ -14,6 +14,32 @@ describe("Calculate Total Revenue Service", () => {
     
     beforeAll(() => {
         DATABASE = new SQLite();
+    })
+
+    beforeEach(() => {
+        DATABASE.exec(`
+            CREATE TABLE IF NOT EXISTS sales (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                product TEXT,
+                quantity INTEGER,
+                price REAL)
+        `);
+
+        DATABASE.exec(`
+            INSERT INTO sales (product, quantity, price) VALUES
+            ('Prego', 10, 1.5),
+            ('Martelo', 5, 10.0),
+            ('Serra', 2, 30.0),
+            ('Parafuso', 100, 0.5),
+            ('Furadeira', 1, 150.0),
+            ('Trena', 3, 20.0),
+            ('Alicate', 5, 15.0),
+            ('Chave de fenda', 10, 5.0)
+        `);
+    })
+
+    afterEach(() => {
+        DATABASE.exec(`DROP TABLE IF EXISTS sales`);
     })
     
     it("should calculate the total revenue of all sales by product", async () => {

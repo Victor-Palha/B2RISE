@@ -8,11 +8,11 @@ beforeAll(() => {
     process.env.DB_NAME = "test.sqlite";
 })
 
-beforeEach(() => {
-    migrate(DATABASE);
-    seed(DATABASE);
-})
+// beforeEach(() => {
+//     migrate(DATABASE);
+//     seed(DATABASE);
+// })
 
-afterEach(() => {
-    drop(DATABASE);
-})
+// afterEach(() => {
+//     drop(DATABASE);
+// })

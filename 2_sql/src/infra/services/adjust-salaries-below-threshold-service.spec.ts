@@ -1,4 +1,4 @@
-import { beforeAll, describe, expect, it } from "vitest";
+import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
 import { SQLite } from "../sqlite/connection";
 import { AdjustSalariesBelowthresholdService } from "./adjust-salaries-below-threshold-service";
 
@@ -16,6 +16,32 @@ describe("Adjust Salaries Below Threshold Service", () => {
     beforeAll(() => {
         DATABASE = new SQLite();
     })
+
+    beforeEach(() => {
+        DATABASE.exec(`
+            CREATE TABLE IF NOT EXISTS employees (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT,
+                salary REAL
+            )
+        `);
+    
+        DATABASE.exec(`
+            INSERT INTO employees (name, salary) VALUES
+            ('John', 1250),
+            ('Doe', 1500),
+            ('Jane', 5000),
+            ('Jim', 5500),
+            ('James', 6000),
+            ('Johnathan', 3500),
+            ('Jimmy', 4000),
+            ('Jenny', 4500)
+        `);
+    });
+    
+    afterEach(() => {
+        DATABASE.exec(`DROP TABLE IF EXISTS employees`);
+    });
 
     it("should be adjusted to 10% of the current salary if it is below 5000", async () => {
         const queryToGetEmployer = DATABASE.prepare(`SELECT * FROM employees WHERE id = ?`);
