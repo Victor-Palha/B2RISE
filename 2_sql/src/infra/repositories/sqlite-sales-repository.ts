@@ -3,7 +3,15 @@ import { CalculateTotalRevenueByProductResponse, SalesRepository } from "../../d
 import { SQLite } from "../sqlite/connection";
 import { SQLiteBaseRepository } from "./sqlite-base-repository";
 
+/**
+ * Repository for handling sales-related operations in an SQLite database.
+ * Extends the SQLiteBaseRepository and implements SalesRepository.
+*/
 export class SQLiteSalesRepository extends SQLiteBaseRepository implements SalesRepository {
+    /**
+     * Constructs the repository with an SQLite database instance.
+     * @param {SQLite} database - The SQLite database connection.
+    */
     constructor(
         private readonly database: SQLite
     ){

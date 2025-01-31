@@ -3,7 +3,15 @@ import { TransactionRepository } from "../../domain/categories/repositories/tran
 import { SQLite } from "../sqlite/connection";
 import { SQLiteBaseRepository } from "./sqlite-base-repository";
 
+/**
+ * Repository for handling transaction-related operations in an SQLite database.
+ * Extends the SQLiteBaseRepository and implements TransactionRepository.
+ */
 export class SQLiteTransactionsRepository extends SQLiteBaseRepository implements TransactionRepository {
+    /**
+     * Constructs the repository with an SQLite database instance.
+     * @param {SQLite} database - The SQLite database connection.
+    */
     constructor(
         private readonly database: SQLite
     ){

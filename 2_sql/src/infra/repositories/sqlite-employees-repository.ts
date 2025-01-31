@@ -3,7 +3,15 @@ import { EmployeesRepository } from "../../domain/employees/repositories/employe
 import { SQLite } from "../sqlite/connection";
 import { SQLiteBaseRepository } from "./sqlite-base-repository";
 
+/**
+ * Repository for handling employee-related operations in an SQLite database.
+ * Extends the SQLiteBaseRepository and implements EmployeesRepository.
+ */
 export class SQLiteEmployeesRepository extends SQLiteBaseRepository implements EmployeesRepository {
+    /**
+     * Constructs the repository with an SQLite database instance.
+     * @param {SQLite} database - The SQLite database connection.
+    */
     constructor(
         private readonly database: SQLite
     ){

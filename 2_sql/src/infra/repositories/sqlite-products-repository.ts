@@ -3,7 +3,15 @@ import { ProductRepository } from "../../domain/categories/repositories/product-
 import { SQLite } from "../sqlite/connection";
 import { SQLiteBaseRepository } from "./sqlite-base-repository";
 
+/**
+ * Repository for handling product-related operations in an SQLite database.
+ * Extends the SQLiteBaseRepository and implements ProductRepository.
+ */
 export class SQLiteProductsRepository extends SQLiteBaseRepository implements ProductRepository {
+    /**
+     * Constructs the repository with an SQLite database instance.
+     * @param {SQLite} database - The SQLite database connection.
+    */
     constructor(
         private readonly database: SQLite
     ){

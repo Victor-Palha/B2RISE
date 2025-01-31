@@ -3,7 +3,15 @@ import { IdentifyDuplicateEmailsResponse, UserRepository } from "../../domain/us
 import { SQLite } from "../sqlite/connection";
 import { SQLiteBaseRepository } from "./sqlite-base-repository";
 
+/**
+ * Repository class for interacting with the SQLite database for user-related operations.
+ * Extends the SQLiteBaseRepository and implements the UserRepository interface.
+ */
 export class SQLiteUserRepository extends SQLiteBaseRepository implements UserRepository {
+    /**
+     * Constructs the repository with an SQLite database instance.
+     * @param {SQLite} database - The SQLite database connection.
+    */
     constructor(
         private readonly database: SQLite
     ){
@@ -25,5 +33,4 @@ export class SQLiteUserRepository extends SQLiteBaseRepository implements UserRe
         const result = query.all();
         return this.mapperFromDBToPresenter<IdentifyDuplicateEmailsResponse>(result);
     }
-
 }

@@ -3,14 +3,22 @@ import { CustomerRepository, FindCustomersWithTotalOrdersResponse } from "../../
 import { SQLite } from "../sqlite/connection";
 import { SQLiteBaseRepository } from "./sqlite-base-repository";
 
+/**
+ * Repository for handling customer-related operations in an SQLite database.
+ * Extends the SQLiteBaseRepository and implements CustomerRepository.
+ */
 export class SQLiteCustomerRepository extends SQLiteBaseRepository implements CustomerRepository {
+    /**
+     * Constructs the repository with an SQLite database instance.
+     * @param {SQLite} database - The SQLite database connection.
+    */
     constructor(
         private readonly database: SQLite
     ) {
         super();
     }
 
-    public async create(customerEntity: CustomerEntity): Promise<void> {
+    public async create(customerEntity: CustomerEntity) {
         const customer = customerEntity.toDto;
         const insert = this.database.prepare(
             `INSERT INTO customers (name, country) VALUES (?, ?)`
@@ -18,7 +26,7 @@ export class SQLiteCustomerRepository extends SQLiteBaseRepository implements Cu
         insert.run(customer.name, customer.country);
     }
 
-    public async findCustomersWithTotalOrders(): Promise<FindCustomersWithTotalOrdersResponse[]> {
+    public async findCustomersWithTotalOrders() {
         const query = this.database.prepare(`
             SELECT c.id, c.name, SUM(o.total) AS total 
             FROM customers c 
