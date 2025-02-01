@@ -17,8 +17,6 @@
 ## Estrutura do projeto
 ```bash
 📂 B2RISE
-│── 📂 .vscode           # Configurações do Visual Studio Code
-│
 │── 📂 1_typescript      # Todos os testes relacionados ao desafio 1. Testes de Typescript
 │
 │── 📂 2_queries         # Todos os testes relacionados ao desafio 2. Testes de SQL 
@@ -36,7 +34,6 @@
 
 ## 🚀 Desafio 1 - Typescript
 Seguindo a documentação provida para realização do desafio, foi criado uma pasta chamada `1_typescript` onde contém todos os testes relacionados ao desafio 1.
----
 As dependências utilizadas para realização dos testes foram:
 - **typescript**: `5.7.3`
 - **vitest**: `3.0.4`
@@ -120,7 +117,6 @@ Cada desafio foi separado em uma pasta, onde contém 3 arquivos `.sql`, seguindo
 
 ## 🫧 Desafio 3 - Clean Code
 Seguindo a documentação provida para realização do desafio, foi criado uma pasta chamada `3_clean_code` onde contém todos os testes relacionados ao desafio 3.
----
 As dependências utilizadas para realização dos testes foram:
 - **typescript**: `5.7.3`
 - **vitest**: `3.0.4`
@@ -156,7 +152,6 @@ npm run test
 
 ## 🧩 Desafio 4 - Extra
 Embora não solicitado, foi criado uma pasta chamada `4_extra` onde contém um sistema de conceitos de **Clean Code** e **Clean Architecture** juntamente com queries relacionadas ao desafio 2. O sistema foi desenvolvido em **Typescript** e utilizando **SQLite** como banco de dados para persistência dos dados, aproveitando as features mais recentes do **Node.js** que nativamente suporta o __driver__ do SQLite.
----
 As dependências utilizadas para realização dos testes foram:
 - **typescript**: `5.7.3`
 - **vitest**: `3.0.4`
