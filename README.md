@@ -7,6 +7,7 @@
 - [🚀 Desafio 1 - Typescript](#-desafio-1---typescript)
 - [📚 Desafio 2 - SQL](#-desafio-2---sql)
 - [🫧 Desafio 3 - Clean Code](#-desafio-3---clean-code)
+- [🧩 Desafio 4 - Extra](#-desafio-4---extra)
 
 ## 🚀 Tecnologias
 - **Node.js**: `>=22.13.1 LTS`
