@@ -1,0 +1,10 @@
+services:
+  postgres:
+    container_name: b2rise-postgres
+    image: bitnami/postgresql:latest
+    environment:
+      - POSTGRESQL_USERNAME=b2rise
+      - POSTGRESQL_PASSWORD=b2rise
+      - POSTGRESQL_DATABASE=b2rise
+    ports:
+      - 5432:5432
