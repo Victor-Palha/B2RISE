@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS employees (
     id SERIAL PRIMARY KEY,
-    name TEXT NOT NULL,
-    salary REAL NOT NULL
+    name VARCHAR(100) NOT NULL,
+    salary NUMERIC(12,2) NOT NULL CHECK (salary >= 0)
 );
