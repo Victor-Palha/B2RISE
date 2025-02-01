@@ -76,6 +76,8 @@ npm run test
 ## 📚 Desafio 2 - SQL
 Seguindo a documentação provida para realização do desafio, foi criado uma pasta chamada `2_queries` onde contém todos os testes relacionados ao desafio 2.
 Para o teste foi utilizado um container docker com banco de dados postgres para realização das queries juntamente com **Queries** escritas em `.sql` com o objetivo de retornar os dados solicitados.
+> [!WARNING]
+> Como no desafio 2 foi solicitado para realizar 2 desafios com o mesmo nome de tabela, a tabela `sales` do desafio 2.5 foi renomeada para `payments` para evitar conflitos.
 
 ### Instruções
 ```bash
@@ -165,11 +167,21 @@ npm run test
 ```
 
 ### Estrutura do projeto
-Para a estruturação do projeto foi utilizado os conceitos de **Clean Code**, **Clean Architecture**, **SOLID** e **DDD**. O projeto foi dividido em 3 camadas:
+Para a estruturação do projeto foi utilizado os conceitos de **Clean Code**, **Clean Architecture**, **SOLID** e **DDD**. O projeto foi dividido em 2 camadas:
 - **Domain**: Camada responsável por conter as regras de negócio da aplicação
 - **Infrastructure**: Camada responsável por realizar a comunicação entre o mundo externo e a aplicação
 
 ![Clean Architecture](./clean-arch.png)
+
+### Padrões de Projeto Utilizados
+1. **Repositories**: Camada responsável por realizar a comunicação com o banco de dados
+    - **_Entity_ Repository**: Classe abstrata que contém os métodos de comunicação com o banco de dados.
+    - **_SQLite_ Repository**: Classe concreta que implementa os métodos de comunicação com o banco de dados SQLite.
+
+2. **Factories**: Camada responsável por criar as instâncias das classes de **UseCases**. 
+    - Essa camada está localizada na camada de **Infrastructure** e é responsável por criar as instâncias das classes de **UseCases** e **Repositories**.
+    - As Factories são chamadas pela camada de **Presenters** para criar as instâncias das classes de **UseCases** utilizando o padrão de **Injeção de Dependência**.
+
 
 ### Comunicação entre camadas
 Para que o sistema funcione corretamente, foi utilizado o padrão de **Injeção de Dependência** para que a camada de **Infrastructure** possa se comunicar com a camada de **Domain**. Para isso, foi utilizado o **Typescript** para tipar as dependências e garantir que a comunicação entre as camadas seja feita de forma correta.
@@ -207,8 +219,12 @@ sequenceDiagram
 ```
 
 ### Comandos
-Para facilitar a execução do sistema, foram criados alguns comandos para facilitar a execução do sistema:
+Para facilitar a execução do sistema, foram criados alguns comandos, sendo eles:
 - **npm run db:drop**: Dropa o banco de dados SQLite
 - **npm run db:migrate**: Cria as tabelas no banco de dados SQLite
 - **npm run db:seed**: Insere dados no banco de dados SQLite
 - **npm run db:reset**: Dropa, cria as tabelas e insere dados no banco de dados SQLite
+
+### Testes
+Para a realização dos testes, foi utilizado o **Vitest** para realizar os testes unitários e garantir que o sistema está funcionando corretamente.
+Quando executado o comando `npm run test`, o sistema cria um banco de dados SQLite temporário na pasta `data` e executa os testes de integração para garantir que o sistema está funcionando corretamente.
