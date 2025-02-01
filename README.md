@@ -107,3 +107,38 @@ Cada desafio foi separado em uma pasta, onde contém 3 arquivos `.sql`, seguindo
     │── 📜 query-table.sql
     │── 📜 seed-table.sql
 ```
+
+## 🫧 Desafio 3 - Clean Code
+Seguindo a documentação provida para realização do desafio, foi criado uma pasta chamada `3_clean_code` onde contém todos os testes relacionados ao desafio 3.
+As dependências utilizadas para realização dos testes foram:
+- **typescript**: `5.7.3`
+- **vitest**: `3.0.4`
+- **@types/node**: `22.12.0`
+
+### Instruções
+```bash
+cd 3_clean_code
+npm install
+npm run test
+```
+
+### Estrutura do projeto
+```bash
+📂 3_clean_code
+│── 📂 src
+│   │── 📂 calculate-discount                   # 3.2 Cálculo de Desconto
+│   │   │── 📜 calculate-discount.ts               # Função para retornar o valor do desconto
+│   │   │── 📜 calculate-discount.spec.ts          # Teste para a função
+│   │
+│   │── 📂 double-even-numbers                  # 3.3 Dobro de Números Pares
+│   │   │── 📜 double-even-numbers.ts              # Função para retornar o dobro de números pares
+│   │   │── 📜 double-even-numbers.spec.ts         # Teste para a função
+│   │
+│   │── 📂 filter-expensive-products             # 3.1 Filtragem de Produtos com preço maior que 100
+│       │── 📜 filter-expensive-products.ts        # Função para retornar os produtos com preço maior que 100
+│       │── 📜 filter-expensive-products.spec.ts   # Teste para a função
+│
+│── 📜 package.json
+│── 📜 package-lock.json
+│── 📜 tsconfig.json
+```
