@@ -1,4 +1,4 @@
-import { EmployerEntity } from "../domain/employees/entity/employees-entity";
+import { EmployerEntity } from "../domain/employees/entity/employer-entity";
 import { EmployeesRepository } from "../domain/employees/repositories/employees-repository";
 import { CustomerEntity } from "../domain/orders/entities/customer-entity";
 import { OrderEntity } from "../domain/orders/entities/order-entity";

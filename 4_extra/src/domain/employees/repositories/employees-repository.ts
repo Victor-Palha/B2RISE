@@ -1,4 +1,4 @@
-import { EmployerEntity } from "../entity/employees-entity";
+import { EmployerEntity } from "../entity/employer-entity";
 
 export abstract class EmployeesRepository {
     /**

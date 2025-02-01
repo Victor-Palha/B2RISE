@@ -36,6 +36,7 @@
 
 ## 🚀 Desafio 1 - Typescript
 Seguindo a documentação provida para realização do desafio, foi criado uma pasta chamada `1_typescript` onde contém todos os testes relacionados ao desafio 1.
+---
 As dependências utilizadas para realização dos testes foram:
 - **typescript**: `5.7.3`
 - **vitest**: `3.0.4`
@@ -119,6 +120,7 @@ Cada desafio foi separado em uma pasta, onde contém 3 arquivos `.sql`, seguindo
 
 ## 🫧 Desafio 3 - Clean Code
 Seguindo a documentação provida para realização do desafio, foi criado uma pasta chamada `3_clean_code` onde contém todos os testes relacionados ao desafio 3.
+---
 As dependências utilizadas para realização dos testes foram:
 - **typescript**: `5.7.3`
 - **vitest**: `3.0.4`
@@ -151,3 +153,67 @@ npm run test
 │── 📜 package-lock.json
 │── 📜 tsconfig.json
 ```
+
+## 🧩 Desafio 4 - Extra
+Embora não solicitado, foi criado uma pasta chamada `4_extra` onde contém um sistema de conceitos de **Clean Code** e **Clean Architecture** juntamente com queries relacionadas ao desafio 2. O sistema foi desenvolvido em **Typescript** e utilizando **SQLite** como banco de dados para persistência dos dados, aproveitando as features mais recentes do **Node.js** que nativamente suporta o __driver__ do SQLite.
+---
+As dependências utilizadas para realização dos testes foram:
+- **typescript**: `5.7.3`
+- **vitest**: `3.0.4`
+- **@types/node**: `22.12.0`
+
+### Instruções
+```bash
+cd 4_extra
+npm install
+npm run test
+```
+
+### Estrutura do projeto
+Para a estruturação do projeto foi utilizado os conceitos de **Clean Code**, **Clean Architecture**, **SOLID** e **DDD**. O projeto foi dividido em 3 camadas:
+- **Domain**: Camada responsável por conter as regras de negócio da aplicação
+- **Infrastructure**: Camada responsável por realizar a comunicação entre o mundo externo e a aplicação
+
+![Clean Architecture](./clean-arch.png)
+
+### Comunicação entre camadas
+Para que o sistema funcione corretamente, foi utilizado o padrão de **Injeção de Dependência** para que a camada de **Infrastructure** possa se comunicar com a camada de **Domain**. Para isso, foi utilizado o **Typescript** para tipar as dependências e garantir que a comunicação entre as camadas seja feita de forma correta.
+Um exemplo de comunicação entre as camadas pode ser vizualizado no seguinte diagrama:
+```mermaid
+sequenceDiagram
+    participant USER as Usuário
+    participant Infrastructure as Infraestrutura
+    participant Presenters as Apresentadores
+    participant Factories as Fábricas
+    participant SQLiteRepository as Repositório SQLite
+    participant Domain as Domínio
+    participant UseCases as Casos de Uso
+
+    USER->>Infrastructure: Solicita dados
+    activate Infrastructure
+    Infrastructure->>Presenters: Busca o Apresentador correto
+    activate Presenters
+    Presenters->>Factories: Solicita criação de Caso de Uso
+    activate Factories
+    Factories->>Domain: Solicita Caso de Uso
+    activate Domain
+    Domain->>UseCases: Retorna Caso de Uso
+    activate UseCases
+    UseCases-->>Domain: Retorna Caso de Uso
+    deactivate UseCases
+    Domain-->>Factories: Retorna Caso de Uso
+    deactivate Domain
+    SQLiteRepository-->>Factories: Retorna Repositório
+    Factories-->>Presenters: Cria Caso de Uso
+    deactivate Factories
+    Presenters-->>USER: Retorna dados solicitados
+    deactivate Presenters
+    deactivate Infrastructure
+```
+
+### Comandos
+Para facilitar a execução do sistema, foram criados alguns comandos para facilitar a execução do sistema:
+- **npm run db:drop**: Dropa o banco de dados SQLite
+- **npm run db:migrate**: Cria as tabelas no banco de dados SQLite
+- **npm run db:seed**: Insere dados no banco de dados SQLite
+- **npm run db:reset**: Dropa, cria as tabelas e insere dados no banco de dados SQLite

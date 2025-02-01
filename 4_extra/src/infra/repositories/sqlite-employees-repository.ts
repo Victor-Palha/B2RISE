@@ -1,4 +1,4 @@
-import { EmployerEntity } from "../../domain/employees/entity/employees-entity";
+import { EmployerEntity } from "../../domain/employees/entity/employer-entity";
 import { EmployeesRepository } from "../../domain/employees/repositories/employees-repository";
 import { SQLite } from "../sqlite/connection";
 import { SQLiteBaseRepository } from "./sqlite-base-repository";
