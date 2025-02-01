@@ -1,4 +1,5 @@
--- Consulta o total de vendas por categoria
+-- Escreva uma query para listar o nome da categoria, o nome do produto e a quantidade total vendida de cada
+-- produto. Filtre apenas as categorias que possuem mais de 100 unidades vendidas no total.
 SELECT 
     c.name AS category_name,
     p.name AS product_name,

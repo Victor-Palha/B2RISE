@@ -14,13 +14,15 @@
 │
 │── 📂 2_queries         # Todos os testes relacionados ao desafio 2. Testes de SQL 
 │
-│── 📂 2_sql             # Extra: Sistema utilizando todas as queries relacionadas ao desafio 2. Testes de SQL
-│
 │── 📂 3_clean_code      # Todos os testes relacionados ao desafio 3. Testes de Clean Code
+│
+│── 📂 4_extra             # Extra: Sistema conceitos de Clean Code, Clean Architecture e queries relacionadas ao desafio 2
 │
 │── 📜 README.md         # Documentação do projeto
 │
 │── 📜 tsconfig.base.json # Configuração relacionado a utilização de Typescript nos desafios
+│
+│── 📜 docker-compose.yaml # Conteiner para upload de banco de dados postgres para queries do teste 2
 ```
 
 ## 🚀 Desafio 1 - Typescript
@@ -62,4 +64,46 @@ npm run test
 │── 📜 package.json                             # Dependências do projeto
 │── 📜 package-lock.json
 │── 📜 tsconfig.json                            # Configuração do Typescript
+```
+
+## 📚 Desafio 2 - SQL
+Seguindo a documentação provida para realização do desafio, foi criado uma pasta chamada `2_queries` onde contém todos os testes relacionados ao desafio 2.
+Para o teste foi utilizado um container docker com banco de dados postgres para realização das queries juntamente com **Queries** escritas em `.sql` com o objetivo de retornar os dados solicitados.
+
+### Instruções
+```bash
+docker-compose up -d
+```
+
+### Estrutura do projeto
+Cada desafio foi separado em uma pasta, onde contém 3 arquivos `.sql`, seguindo a seguinte estrutura:
+- **create-table.sql**: Query para criação da tabela relacionada ao desafio no banco de dados postgres
+- **query-table.sql**: Query para retornar o resultado esperado do desafio
+- **seed-table.sql**: Query para inserção de dados na tabela
+```bash
+📂 2_queries
+│── 📂 2.1 
+│   │── 📜 create-table.sql
+│   │── 📜 query-table.sql
+│   │── 📜 seed-table.sql
+│── 📂 2.2
+│   │── 📜 create-table.sql
+│   │── 📜 query-table.sql
+│   │── 📜 seed-table.sql
+│── 📂 2.3
+│   │── 📜 create-table.sql
+│   │── 📜 query-table.sql
+│   │── 📜 seed-table.sql
+│── 📂 2.4
+│   │── 📜 create-table.sql
+│   │── 📜 query-table.sql
+│   │── 📜 seed-table.sql
+│── 📂 2.5
+│   │── 📜 create-table.sql
+│   │── 📜 query-table.sql
+│   │── 📜 seed-table.sql
+│── 📂 2.6
+    │── 📜 create-table.sql
+    │── 📜 query-table.sql
+    │── 📜 seed-table.sql
 ```
