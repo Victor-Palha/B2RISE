@@ -66,8 +66,8 @@ npm run test
 │   │── 📂 values                               # 1.1 Manipulação de Tipos e Generics
 │       │── 📂 error        
 │       │   │── 📜 Invalid-operation-error.ts
-│       │── 📜 calculate.ts                     # Função para retornar os valores de uma key de um array de objetos
-│       │── 📜 calculate.spec.ts                # Teste para a função
+│       │── 📜 extract-values.ts                # Função para retornar os valores de uma key de um array de objetos
+│       │── 📜 extract-values.spec.ts           # Teste para a função
 │
 │── 📜 package.json                             # Dependências do projeto
 │── 📜 package-lock.json
